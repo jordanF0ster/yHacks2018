@@ -28,23 +28,38 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable  {
-	@FXML
-	private Label label1 ;
-	@FXML
-	private Label label2 ;
+
 	
 	@FXML
 	private Button File;
+
+	
+	@FXML
+	public File onFileClick(MouseEvent event) throws IOException {
+		ArrayList<String> fileType = new ArrayList<>();
+		fileType.add("*.mov");
+		fileType.add("*.mp4");
+		fileType.add("*.wmv");
+		fileType.add("*.avi");
+		fileType.add("*.flv");
+	    FileChooser chooser = new FileChooser();
+	    chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video formats", fileType));
+	    chooser.setTitle("Open File");
+	    File file = chooser.showOpenDialog(new Stage());
+	    File.setVisible(false);
+	    
+	    return file;
+	    
+	}
+	
 	
 	@FXML
 	private ProgressBar progressBar;
-	public static ProgressBar statprogressBar;
 	
-	@FXML 
-	private Label progress;
-	public static Label label;
 	
-		class bg_Thread implements Runnable {
+
+	
+	class bg_Thread implements Runnable {
 
 	@Override
 	public void run() {
@@ -76,23 +91,6 @@ public class Controller implements Initializable  {
 		progressBar.setProgress(0.0);
 	
 	} 
-	
-	@FXML
-	public File onFileClick(MouseEvent event) throws IOException {
-		ArrayList<String> fileType = new ArrayList<>();
-		fileType.add("*.mov");
-		fileType.add("*.mp4");
-		fileType.add("*.wmv");
-		fileType.add("*.avi");
-		fileType.add("*.flv");
-	    FileChooser chooser = new FileChooser();
-	    chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video formats", fileType));
-	    chooser.setTitle("Open File");
-	    File file = chooser.showOpenDialog(new Stage());
-	    File.setVisible(false);
-	    return file;
-	    
-	}
 
 
 	
